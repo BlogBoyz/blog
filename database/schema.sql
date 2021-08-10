@@ -11,16 +11,46 @@ CREATE TABLE IF NOT EXISTS users (
   firstName VARCHAR(30) DEFAULT NULL,
   lastName VARCHAR(30) DEFAULT NULL,
 
+  UNIQUE(email),
+  UNIQUE(username),
   PRIMARY KEY (user_id)
 );
 
 CREATE TABLE IF NOT EXISTS posts (
-  id INT NOT NULL AUTO_INCREMENT,
-  userId INT NOT NULL,
+  post_id SERIAL,
+  user_id INT NOT NULL,
   title VARCHAR(127) NOT NULL,
-  filPath VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id)
+  postItself VARCHAR(255) NOT NULL,
+
+  PRIMARY KEY (post_id)
 );
+
+CREATE SCHEMA IF NOT EXISTS posts_schema
+  CREATE TABLE IF NOT EXISTS posts (
+    post_id SERIAL,
+    user_id INT NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    subtitle VARCHAR(255) NOT NULL,
+    content TEXT,
+
+    PRIMARY KEY (post_id)
+  )
+  CREATE TABLE IF NOT EXISTS likes (
+    like_id SERIAL,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+
+    PRIMARY KEY (like_id),
+
+    CONSTRAINT fk_post
+      FOREIGN KEY(post_id)
+        REFERENCES posts(post_id)
+  )
+  CREATE TABLE IF NOT EXISTS claps (
+    clap_id SERIAL,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+  );
 
 CREATE TABLE IF NOT EXISTS comments (
   id INT NOT NULL AUTO_INCREMENT,

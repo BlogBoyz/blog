@@ -1,0 +1,44 @@
+version: "1"
+services:
+  memcached:
+    image: "memcached:alpine3.14"
+
+  db:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+
+  rabbitmq:
+    image: "rabbitmq:3-management-alpine"
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  usersservice:
+    image:
+
+    depends_on:
+      -db
+      -memcached
+
+  postservice:
+    image:
+
+    depends_on:
+      -db
+      -memcached
+
+  commentsservice:
+    image:
+
+  depends_on:
+    -db
+    -memcached
+
+
+network:

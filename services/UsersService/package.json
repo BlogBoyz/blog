@@ -1,22 +1,19 @@
 {
-  "name": "authservice",
+  "name": "usersservice",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "nodemon --watch ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Marko Turchyn <marko.turchyn@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@grpc/grpc-js": "^1.3.6",
     "@grpc/proto-loader": "^0.6.4",
-    "express": "^4.17.1",
-    "jest": "^27.0.6",
-    "jsonwebtoken": "^8.5.1",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
